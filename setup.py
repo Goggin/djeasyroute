@@ -15,7 +15,7 @@ setup(name='djeasyroute',
       classifiers=[
             "Development Status :: 3 - Alpha",
             "Framework :: Django",
-            "License :: OSI Approved :: MIT",
+            "License :: OSI Approved :: MIT License",
             "Operating System :: OS Independent",
             "Intended Audience :: Developers",
             "Topic :: Software Development",
