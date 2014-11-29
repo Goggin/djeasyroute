@@ -21,6 +21,7 @@ class EasyRoute(object):
     _repl = {
         'int': r'(?P<{paramname}>\d+)',
         'str': r'(?P<{paramname}>[^/]+)',
+        'all': r'(?P<{paramname}>.*)',
         'float': r'(?P<{paramname}>\d+(\.\d+)?)',
         'bool': r'(?P<{paramname}>[01tfTF]|[Tt][Rr][Uu][Ee]|[Ff][Aa][Ll][Ss][Ee])',
     }
