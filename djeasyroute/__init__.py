@@ -3,7 +3,7 @@ from django.conf.urls import url
 from functools import wraps
 import re, inspect
 
-def route(path, name=None, prefix=''):
+def route(path, name=None):
     def wrap(f):
         @wraps(f)
         def wrapper(*args, **kwargs):
@@ -12,7 +12,7 @@ def route(path, name=None, prefix=''):
         if not hasattr(wrapper, '__routes__'):
             wrapper.__routes__ = []
 
-        wrapper.__routes__.insert(0, dict(path=path, name=name, prefix=prefix))
+        wrapper.__routes__.insert(0, dict(path=path, name=name))
         
         return wrapper
     return wrap
@@ -26,9 +26,6 @@ class EasyRoute(object):
         'bool': r'(?P<{paramname}>[01tfTF]|[Tt][Rr][Uu][Ee]|[Ff][Aa][Ll][Ss][Ee])',
     }
     _syntax = re.compile(r'\<(?P<paramname>[A-Za-z0-9_]+)(:(?P<type>[A-Za-z0-9]+))?\>')
-
-    def __init__(self, prefix=''):
-        self.prefix = prefix or ''
 
     @property
     def urls(self):
@@ -49,7 +46,6 @@ class EasyRoute(object):
         for route in routes:
             path = route.get('path', None)
             name = route.get('name', None)
-            prefix = route.get('prefix', self.prefix)
 
             items = path.split('/')
             r = []
@@ -65,4 +61,4 @@ class EasyRoute(object):
                     r.append(EasyRoute._repl[typ].format(paramname=paramname))
                 else:
                     r.append(i)
-            self._urls.append(url(r'^' + r'/'.join(r) + r'$', fn, name=name, prefix=prefix))
+            self._urls.append(url(r'^' + r'/'.join(r) + r'$', fn, name=name))

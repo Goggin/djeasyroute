@@ -6,7 +6,7 @@ except ImportError:
     from distutils.core import setup
 
 setup(name='djeasyroute',
-      version='0.0.1',
+      version='0.0.3',
       description='A simple class based route system for django similar to flask',
       author='Ryan Goggin',
       author_email='info@ryangoggin.net',
